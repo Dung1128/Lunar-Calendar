@@ -10,27 +10,28 @@ export default class DayComponent extends React.PureComponent {
     customStyleDate(date) {
         if (date.dateString == moment().format('YYYY-MM-DD')) {
             return {
-                backgroundColor: '#425486',
+                backgroundColor: '#FFC20E',
             }
         }
 
         return {
-            backgroundColor: '#F4F7FD',
+            // backgroundColor: '#F4F7FD',
+            backgroundColor: '#fff',
         }
 
     }
 
     customStyleTitleDate(date) {
 
-        if (date.dateString == moment().format('YYYY-MM-DD')) {
-            return {
-                color: '#fff',
-                fontWeight: 'bold',
-            }
-        }
+        // if (date.dateString == moment().format('YYYY-MM-DD')) {
+        //     return {
+        //         color: '#fff',
+        //         fontWeight: 'bold',
+        //     }
+        // }
 
         return {
-            color: '#425486',
+            color: '#050505',
         }
 
     }
@@ -40,25 +41,32 @@ export default class DayComponent extends React.PureComponent {
 
         return (
             <View style={{
-                width: 42,
-                height: 42,
-                borderRadius: 10,
+                width: 44,
+                height: 44,
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
                 padding: 5,
-                ...this.customStyleDate(date)
+                ...this.customStyleDate(date),
             }}>
-                <Text style={{
-                    fontSize: 15,
-                    ...this.customStyleTitleDate(date),
-                }}>
-                    {date.day}
-                </Text>
-                <Text style={{
-                    fontSize: 10,
-                    color: '#9097A5',
-                    ...this.customStyleTitleDate(date)
-                }}>
-                    {lunarDay} {lunarDay == 1 && `/${lunarMonth}`}
-                </Text>
+                <View >
+                    <Text style={{
+                        fontSize: 16,
+                        ...this.customStyleTitleDate(date),
+                    }}>
+                        {date.day}
+                    </Text>
+                </View>
+                <View style={{ alignItems: 'flex-end' }}>
+                    <Text style={{
+                        fontSize: 11,
+                        color: '#9097A5',
+
+                        ...this.customStyleTitleDate(date)
+                    }}>
+                        {lunarDay} {lunarDay == 1 && `/${lunarMonth}`}
+                    </Text>
+                </View>
+
             </View>
         )
     }

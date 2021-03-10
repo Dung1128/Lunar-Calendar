@@ -50,40 +50,40 @@ export default class App extends React.PureComponent {
         />
         <View style={styles.toolbar} />
         <View>
-          <Text>sdadad</Text>
+          <View style={{ borderBottomWidth: 2, borderBottomColor: '#FFC20E', paddingHorizontal: 16 }}>
+            <CalendarStrip
+              scrollable
+              calendarAnimation={{ type: 'sequence', duration: 30 }}
+              daySelectionAnimation={{ type: 'background', duration: 300, highlightColor: '#9265DC' }}
+              style={{ height: 50 }}
+              calendarHeaderStyle={{ color: 'white' }}
+              // calendarColor={'#3343CE'}
+              scrollerPaging={true}
+              dateNumberStyle={{ color: 'black' }}
+              dateNameStyle={{ color: 'black' }}
+              iconContainer={{ flex: 0.1 }}
+              hideArrow={true}
+              paddingContainer={0}
+              // customDatesStyles={this.state.customDatesStyles}
+              highlightDateNameStyle={{ color: 'red' }}
+              highlightDateNumberStyle={{ color: 'yellow' }}
+              highlightDateContainerStyle={{ backgroundColor: 'black' }}
 
-          <CalendarStrip
-            scrollable
-            calendarAnimation={{ type: 'sequence', duration: 30 }}
-            daySelectionAnimation={{ type: 'background', duration: 300, highlightColor: '#9265DC' }}
-            style={{ height: 60 }}
-            calendarHeaderStyle={{ color: 'white' }}
-            // calendarColor={'#3343CE'}
-            scrollerPaging={true}
-            dateNumberStyle={{ color: 'black' }}
-            dateNameStyle={{ color: 'black' }}
-            iconContainer={{ flex: 0.1 }}
-            hideArrow={true}
-            paddingContainer={16}
-            // customDatesStyles={this.state.customDatesStyles}
-            highlightDateNameStyle={{ color: 'red' }}
-            highlightDateNumberStyle={{ color: 'yellow' }}
-            highlightDateContainerStyle={{ backgroundColor: 'black' }}
+              // markedDates={this.state.markedDates}
+              // datesBlacklist={this.datesBlacklistFunc}
+              // onDateSelected={this.onDateSelected}
+              // useIsoWeekday={false}
+              dayComponent={({ date }) => {
+                const newDate = { ...date, dateString: moment(date._d).format('YYYY-MM-DD'), day: moment(date._d).get('D') }
+                let lunarDay = Recipe.convertSolar2Lunar(moment(date._d).get('D'), moment(date._d).get('M') + 1, moment(date._d).get('Y'), 7.0)[0]
+                let lunarMonth = Recipe.convertSolar2Lunar(moment(date._d).get('D'), moment(date._d).get('M') + 1, moment(date._d).get('Y'), 7.0)[1]
 
-            // markedDates={this.state.markedDates}
-            // datesBlacklist={this.datesBlacklistFunc}
-            // onDateSelected={this.onDateSelected}
-            // useIsoWeekday={false}
-            dayComponent={({ date }) => {
-              const newDate = { ...date, dateString: moment(date._d).format('YYYY-MM-DD'), day: moment(date._d).get('D') }
-              let lunarDay = Recipe.convertSolar2Lunar(moment(date._d).get('D'), moment(date._d).get('M') + 1, moment(date._d).get('Y'), 7.0)[0]
-              let lunarMonth = Recipe.convertSolar2Lunar(moment(date._d).get('D'), moment(date._d).get('M') + 1, moment(date._d).get('Y'), 7.0)[1]
-
-              return (
-                <DayComponent lunarDay={lunarDay} lunarMonth={lunarMonth} date={newDate} />
-              )
-            }}
-          />
+                return (
+                  <DayComponent lunarDay={lunarDay} lunarMonth={lunarMonth} date={newDate} />
+                )
+              }}
+            />
+          </View>
 
         </View>
         <CalendarList
